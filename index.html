@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,15 +56,20 @@ font-size:16px;
 margin-bottom:8px;
 }
 
+/* TOTAL MAINTENANCE */
+
 .total-maintenance-row{
 font-weight:bold;
 }
 
 .total-maintenance-amount{
 background:#90ee90;
+color:#006400;
 font-weight:bold;
-color:green;
+font-size:16px;
 }
+
+/* TOTAL EXPENSE */
 
 .total-expense-row{
 font-weight:bold;
@@ -71,9 +77,11 @@ font-weight:bold;
 
 .total-expense-amount{
 background:#ffcccc;
-font-weight:bold;
 color:red;
+font-weight:bold;
 }
+
+/* BALANCE */
 
 .balance{
 background:#90ee90;
@@ -133,20 +141,18 @@ MARCH-2026
 <th>Amount</th>
 </tr>
 
-<tr><td></td><td>101</td><td class="maint">2000</td></tr>
-<tr><td></td><td>102</td><td class="maint">2000</td></tr>
-<tr><td></td><td>201</td><td class="maint">2000</td></tr>
-<tr><td></td><td>202</td><td class="maint">2000</td></tr>
-<tr><td></td><td>301</td><td class="maint">2000</td></tr>
-<tr><td></td><td>302</td><td class="maint">2000</td></tr>
-<tr><td></td><td>401</td><td class="maint">2000</td></tr>
-<tr><td></td><td>402</td><td class="maint">2000</td></tr>
-<tr><td></td><td>501</td><td class="maint">2000</td></tr>
-<tr><td></td><td>502</td><td class="maint">2000</td></tr>
+<tr class="maintRow"><td></td><td>101</td><td class="maint">2000</td></tr>
+<tr class="maintRow"><td></td><td>102</td><td class="maint">2000</td></tr>
+<tr class="maintRow"><td></td><td>201</td><td class="maint">2000</td></tr>
+<tr class="maintRow"><td></td><td>202</td><td class="maint">2000</td></tr>
+<tr class="maintRow"><td></td><td>301</td><td class="maint">2000</td></tr>
+<tr class="maintRow"><td></td><td>302</td><td class="maint">2000</td></tr>
+<tr class="maintRow"><td></td><td>401</td><td class="maint">2000</td></tr>
+<tr class="maintRow"><td></td><td>402</td><td class="maint">2000</td></tr>
+<tr class="maintRow"><td></td><td>501</td><td class="maint">2000</td></tr>
+<tr class="maintRow"><td></td><td>502</td><td class="maint">2000</td></tr>
 
-<!-- Lift usage row -->
-
-<tr>
+<tr class="maintRow">
 <td></td>
 <td>Lift Usage (Flat 102)</td>
 <td class="maint">500</td>
@@ -182,11 +188,11 @@ MARCH-2026
 <th>Amount</th>
 </tr>
 
-<tr><td></td><td>Watchman Salary</td><td class="amount">6000</td></tr>
-<tr><td></td><td>Power Bill</td><td class="amount">1411</td></tr>
-<tr><td></td><td>Manjeera Water Bill</td><td class="amount">1484</td></tr>
-<tr><td></td><td>Garbage Collection (7 Flats)</td><td class="amount">700</td></tr>
-<tr><td></td><td>Common Net Bill (6 + 1 Months)</td><td class="amount">3887</td></tr>
+<tr class="expenseRow"><td></td><td>Watchman Salary</td><td class="amount">6000</td></tr>
+<tr class="expenseRow"><td></td><td>Power Bill</td><td class="amount">1411</td></tr>
+<tr class="expenseRow"><td></td><td>Manjeera Water Bill</td><td class="amount">1484</td></tr>
+<tr class="expenseRow"><td></td><td>Garbage Collection (7 Flats)</td><td class="amount">700</td></tr>
+<tr class="expenseRow"><td></td><td>Common Net Bill (6 + 1 Months)</td><td class="amount">3887</td></tr>
 
 <tr class="total-expense-row">
 <td colspan="2">Total Expenses</td>
@@ -218,45 +224,37 @@ Report Generated: March 2026
 
 let openingBalance = 35726;
 
-
 /* Currency Format */
 
 function formatINR(num){
 return "₹" + num.toLocaleString("en-IN");
 }
 
-
-/* Show Opening Balance */
+/* Display Opening Balance */
 
 document.getElementById("openingBalanceDisplay").innerText =
 formatINR(openingBalance);
 
-
 /* Maintenance Calculation */
 
 let maintenanceRows =
-document.querySelectorAll("#maintenanceTable tr");
+document.querySelectorAll(".maintRow");
 
 let totalMaintenance = 0;
 
-for(let i=1;i<maintenanceRows.length-1;i++){
+maintenanceRows.forEach((row,index)=>{
 
-maintenanceRows[i].children[0].innerText = i;
+row.children[0].innerText = index + 1;
 
 let amount =
-maintenanceRows[i].querySelector(".maint");
-
-if(amount){
+row.querySelector(".maint");
 
 totalMaintenance += Number(amount.innerText);
 
-}
-
-}
+});
 
 document.getElementById("totalMaintenance").innerText =
 formatINR(totalMaintenance);
-
 
 /* Opening + Maintenance */
 
@@ -266,32 +264,26 @@ openingBalance + totalMaintenance;
 document.getElementById("openingPlusMaintenance").innerText =
 formatINR(openingPlusMaintenance);
 
-
 /* Expense Calculation */
 
 let expenseRows =
-document.querySelectorAll("#expenseTable tr");
+document.querySelectorAll(".expenseRow");
 
 let totalExpense = 0;
 
-for(let i=1;i<expenseRows.length-1;i++){
+expenseRows.forEach((row,index)=>{
 
-expenseRows[i].children[0].innerText = i;
+row.children[0].innerText = index + 1;
 
 let amount =
-expenseRows[i].querySelector(".amount");
-
-if(amount){
+row.querySelector(".amount");
 
 totalExpense += Number(amount.innerText);
 
-}
-
-}
+});
 
 document.getElementById("totalExpense").innerText =
 formatINR(totalExpense);
-
 
 /* Closing Balance */
 
@@ -305,3 +297,4 @@ formatINR(closingBalance);
 
 </body>
 </html>
+```
