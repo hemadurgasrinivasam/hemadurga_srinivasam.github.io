@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hemadurga Srinivasam Dashboard March 2026</title>
+
+<style>
+
+body{
+font-family:Arial, sans-serif;
+margin:0;
+background:#f4f6f9;
+}
+
+.header{
+background:#3f7ae0;
+color:white;
+text-align:center;
+padding:16px;
+font-size:20px;
+font-weight:bold;
+}
+
+.container{
+padding:15px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-bottom:15px;
+display:block;
+overflow-x:auto;
+}
+
+th,td{
+border:1px solid #ddd;
+padding:8px;
+text-align:center;
+font-size:14px;
+white-space:nowrap;
+}
+
+th{
+background:#f1f1f1;
+}
+
+#maintenanceTable tr:nth-child(even) td,
+#expenseTable tr:nth-child(even) td{
+background:#f9f9f9;
+}
+
+h3{
+font-size:16px;
+margin-bottom:8px;
+}
+
+.total-maintenance-row{
+font-weight:bold;
+}
+
+.total-maintenance-amount{
+background:#90ee90;
+font-weight:bold;
+color:green;
+}
+
+.total-expense-row{
+font-weight:bold;
+}
+
+.total-expense-amount{
+background:#ffcccc;
+font-weight:bold;
+color:red;
+}
+
+.balance{
+background:#90ee90;
+font-weight:bold;
+}
+
+.footer{
+text-align:center;
+font-size:12px;
+color:#555;
+margin-top:10px;
+}
+
+@media(max-width:600px){
+
+.header{
+font-size:18px;
+}
+
+th,td{
+font-size:13px;
+padding:6px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+HEMADURGA SRINIVASAM<br>
+MARCH-2026
+</div>
+
+<div class="container">
+
+<!-- Opening Balance -->
+
+<table>
+<tr>
+<th>Last Month Balance</th>
+<td class="balance" id="openingBalanceDisplay"></td>
+</tr>
+</table>
+
+<!-- Maintenance -->
+
+<h3>Maintenance</h3>
+
+<table id="maintenanceTable">
+
+<tr>
+<th>S.No</th>
+<th>Flat</th>
+<th>Amount</th>
+</tr>
+
+<tr><td></td><td>101</td><td class="maint">2000</td></tr>
+<tr><td></td><td>102</td><td class="maint">2000</td></tr>
+<tr><td></td><td>201</td><td class="maint">2000</td></tr>
+<tr><td></td><td>202</td><td class="maint">2000</td></tr>
+<tr><td></td><td>301</td><td class="maint">2000</td></tr>
+<tr><td></td><td>302</td><td class="maint">2000</td></tr>
+<tr><td></td><td>401</td><td class="maint">2000</td></tr>
+<tr><td></td><td>402</td><td class="maint">2000</td></tr>
+<tr><td></td><td>501</td><td class="maint">2000</td></tr>
+<tr><td></td><td>502</td><td class="maint">2000</td></tr>
+
+<!-- Lift usage row -->
+
+<tr>
+<td></td>
+<td>Lift Usage (Flat 102)</td>
+<td class="maint">500</td>
+</tr>
+
+<tr class="total-maintenance-row">
+<td colspan="2">Total Maintenance</td>
+<td id="totalMaintenance" class="total-maintenance-amount"></td>
+</tr>
+
+</table>
+
+<!-- Opening + Maintenance -->
+
+<table>
+
+<tr>
+<th>Last Month Balance + Maintenance</th>
+<td class="balance" id="openingPlusMaintenance"></td>
+</tr>
+
+</table>
+
+<!-- Expenses -->
+
+<h3>Expenses</h3>
+
+<table id="expenseTable">
+
+<tr>
+<th>S.No</th>
+<th>Expense</th>
+<th>Amount</th>
+</tr>
+
+<tr><td></td><td>Watchman Salary</td><td class="amount">6000</td></tr>
+<tr><td></td><td>Power Bill</td><td class="amount">1411</td></tr>
+<tr><td></td><td>Manjeera Water Bill</td><td class="amount">1484</td></tr>
+<tr><td></td><td>Garbage Collection (7 Flats)</td><td class="amount">700</td></tr>
+<tr><td></td><td>Common Net Bill (6 + 1 Months)</td><td class="amount">3887</td></tr>
+
+<tr class="total-expense-row">
+<td colspan="2">Total Expenses</td>
+<td id="totalExpense" class="total-expense-amount"></td>
+</tr>
+
+</table>
+
+<!-- Closing Balance -->
+
+<table>
+
+<tr class="balance">
+<td>Closing Balance</td>
+<td id="closingBalance"></td>
+</tr>
+
+</table>
+
+<div class="footer">
+Report Generated: March 2026
+</div>
+
+</div>
+
+<script>
+
+/* Opening Balance */
+
+let openingBalance = 35726;
+
+
+/* Currency Format */
+
+function formatINR(num){
+return "₹" + num.toLocaleString("en-IN");
+}
+
+
+/* Show Opening Balance */
+
+document.getElementById("openingBalanceDisplay").innerText =
+formatINR(openingBalance);
+
+
+/* Maintenance Calculation */
+
+let maintenanceRows =
+document.querySelectorAll("#maintenanceTable tr");
+
+let totalMaintenance = 0;
+
+for(let i=1;i<maintenanceRows.length-1;i++){
+
+maintenanceRows[i].children[0].innerText = i;
+
+let amount =
+maintenanceRows[i].querySelector(".maint");
+
+if(amount){
+
+totalMaintenance += Number(amount.innerText);
+
+}
+
+}
+
+document.getElementById("totalMaintenance").innerText =
+formatINR(totalMaintenance);
+
+
+/* Opening + Maintenance */
+
+let openingPlusMaintenance =
+openingBalance + totalMaintenance;
+
+document.getElementById("openingPlusMaintenance").innerText =
+formatINR(openingPlusMaintenance);
+
+
+/* Expense Calculation */
+
+let expenseRows =
+document.querySelectorAll("#expenseTable tr");
+
+let totalExpense = 0;
+
+for(let i=1;i<expenseRows.length-1;i++){
+
+expenseRows[i].children[0].innerText = i;
+
+let amount =
+expenseRows[i].querySelector(".amount");
+
+if(amount){
+
+totalExpense += Number(amount.innerText);
+
+}
+
+}
+
+document.getElementById("totalExpense").innerText =
+formatINR(totalExpense);
+
+
+/* Closing Balance */
+
+let closingBalance =
+openingBalance + totalMaintenance - totalExpense;
+
+document.getElementById("closingBalance").innerText =
+formatINR(closingBalance);
+
+</script>
+
+</body>
+</html>
