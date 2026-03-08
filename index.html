@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,108 +5,106 @@
 <title>Hemadurga Srinivasam Dashboard March 2026</title>
 
 <style>
-
 body{
-font-family:Arial, sans-serif;
-margin:0;
-background:#f4f6f9;
+  font-family:Arial, sans-serif;
+  margin:0;
+  background-image:url("background.jpg"); /* Add your image file here */
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
 }
 
 .header{
-background:#3f7ae0;
-color:white;
-text-align:center;
-padding:16px;
-font-size:20px;
-font-weight:bold;
+  background:#3f7ae0;
+  color:white;
+  text-align:center;
+  padding:16px;
+  font-size:20px;
+  font-weight:bold;
 }
 
 .container{
-padding:15px;
+  padding:15px;
+  background:rgba(255,255,255,0.9); /* Makes content readable on image */
+  border-radius:10px;
 }
 
+/* Tables */
 table{
-width:100%;
-border-collapse:collapse;
-margin-bottom:15px;
-display:block;
-overflow-x:auto;
+  width:100%;
+  border-collapse:collapse;
+  margin-bottom:15px;
+  display:block;
+  overflow-x:auto;
 }
 
 th,td{
-border:1px solid #ddd;
-padding:8px;
-text-align:center;
-font-size:14px;
-white-space:nowrap;
+  border:1px solid #ddd;
+  padding:8px;
+  text-align:center;
+  font-size:14px;
+  white-space:nowrap;
 }
 
 th{
-background:#f1f1f1;
+  background:#f1f1f1;
 }
 
 #maintenanceTable tr:nth-child(even) td,
 #expenseTable tr:nth-child(even) td{
-background:#f9f9f9;
+  background:#f9f9f9;
 }
 
 h3{
-font-size:16px;
-margin-bottom:8px;
+  font-size:16px;
+  margin-bottom:8px;
 }
 
 /* TOTAL MAINTENANCE */
-
 .total-maintenance-row{
-font-weight:bold;
+  font-weight:bold;
 }
-
 .total-maintenance-amount{
-background:#90ee90;
-color:#006400;
-font-weight:bold;
-font-size:16px;
+  background:#90ee90;
+  color:#006400;
+  font-weight:bold;
+  font-size:16px;
 }
 
 /* TOTAL EXPENSE */
-
 .total-expense-row{
-font-weight:bold;
+  font-weight:bold;
 }
-
 .total-expense-amount{
-background:#ffcccc;
-color:red;
-font-weight:bold;
+  background:#ffcccc;
+  color:red;
+  font-weight:bold;
 }
 
 /* BALANCE */
-
 .balance{
-background:#90ee90;
-font-weight:bold;
+  background:#90ee90;
+  font-weight:bold;
 }
 
+/* Footer */
 .footer{
-text-align:center;
-font-size:12px;
-color:#555;
-margin-top:10px;
+  text-align:center;
+  font-size:13px;
+  color:#444;
+  margin-top:15px;
+  padding:10px;
 }
 
 @media(max-width:600px){
-
-.header{
-font-size:18px;
+  .header{
+    font-size:18px;
+  }
+  th,td{
+    font-size:13px;
+    padding:6px;
+  }
 }
-
-th,td{
-font-size:13px;
-padding:6px;
-}
-
-}
-
 </style>
 </head>
 
@@ -121,20 +118,16 @@ MARCH-2026
 <div class="container">
 
 <!-- Opening Balance -->
-
 <table>
 <tr>
-<th>Last Month Balance:</th>
+<th>Last Month Balance</th>
 <td class="balance" id="openingBalanceDisplay"></td>
 </tr>
 </table>
 
 <!-- Maintenance -->
-
 <h3>Maintenance</h3>
-
 <table id="maintenanceTable">
-
 <tr>
 <th>S.No</th>
 <th>Flat</th>
@@ -152,36 +145,26 @@ MARCH-2026
 <tr class="maintRow"><td></td><td>501</td><td class="maint">2000</td></tr>
 <tr class="maintRow"><td></td><td>502</td><td class="maint">2000</td></tr>
 
-<tr class="maintRow">
-<td></td>
-<td>Lift Usage (Flat 102)</td>
-<td class="maint">500</td>
-</tr>
+<!-- Lift Usage -->
+<tr class="maintRow"><td></td><td>Lift Usage (Flat 102)</td><td class="maint">500</td></tr>
 
 <tr class="total-maintenance-row">
-<td colspan="2">Total Maintenance:</td>
+<td colspan="2">Total Maintenance</td>
 <td id="totalMaintenance" class="total-maintenance-amount"></td>
 </tr>
-
 </table>
 
 <!-- Opening + Maintenance -->
-
 <table>
-
 <tr>
-<th>Last Month Balance + Maintenance:</th>
+<th>Last Month Balance + Maintenance</th>
 <td class="balance" id="openingPlusMaintenance"></td>
 </tr>
-
 </table>
 
 <!-- Expenses -->
-
 <h3>Expenses</h3>
-
 <table id="expenseTable">
-
 <tr>
 <th>S.No</th>
 <th>Expense</th>
@@ -195,107 +178,71 @@ MARCH-2026
 <tr class="expenseRow"><td></td><td>Common Net Bill (6 + 1 Months)</td><td class="amount">3887</td></tr>
 
 <tr class="total-expense-row">
-<td colspan="2">Total Expenses:</td>
+<td colspan="2">Total Expenses</td>
 <td id="totalExpense" class="total-expense-amount"></td>
 </tr>
-
 </table>
 
 <!-- Closing Balance -->
-
 <table>
-
 <tr class="balance">
-<td>Closing Balance:</td>
+<td>Closing Balance</td>
 <td id="closingBalance"></td>
 </tr>
-
 </table>
 
+<!-- Footer -->
 <div class="footer">
-Report Generated: March 2026
+Report Generated: March 2026<br>
 Developed by <b>Siva Charan Bethini</b>
 </div>
 
 </div>
 
 <script>
-
 /* Opening Balance */
-
 let openingBalance = 35726;
 
 /* Currency Format */
-
 function formatINR(num){
-return "₹" + num.toLocaleString("en-IN");
+  return "₹" + num.toLocaleString("en-IN");
 }
 
 /* Display Opening Balance */
-
-document.getElementById("openingBalanceDisplay").innerText =
-formatINR(openingBalance);
+document.getElementById("openingBalanceDisplay").innerText = formatINR(openingBalance);
 
 /* Maintenance Calculation */
-
-let maintenanceRows =
-document.querySelectorAll(".maintRow");
-
+let maintenanceRows = document.querySelectorAll(".maintRow");
 let totalMaintenance = 0;
 
 maintenanceRows.forEach((row,index)=>{
-
-row.children[0].innerText = index + 1;
-
-let amount =
-row.querySelector(".maint");
-
-totalMaintenance += Number(amount.innerText);
-
+  row.children[0].innerText = index + 1;
+  let amount = row.querySelector(".maint");
+  totalMaintenance += Number(amount.innerText);
 });
 
-document.getElementById("totalMaintenance").innerText =
-formatINR(totalMaintenance);
+document.getElementById("totalMaintenance").innerText = formatINR(totalMaintenance);
 
 /* Opening + Maintenance */
-
-let openingPlusMaintenance =
-openingBalance + totalMaintenance;
-
-document.getElementById("openingPlusMaintenance").innerText =
-formatINR(openingPlusMaintenance);
+let openingPlusMaintenance = openingBalance + totalMaintenance;
+document.getElementById("openingPlusMaintenance").innerText = formatINR(openingPlusMaintenance);
 
 /* Expense Calculation */
-
-let expenseRows =
-document.querySelectorAll(".expenseRow");
-
+let expenseRows = document.querySelectorAll(".expenseRow");
 let totalExpense = 0;
 
 expenseRows.forEach((row,index)=>{
-
-row.children[0].innerText = index + 1;
-
-let amount =
-row.querySelector(".amount");
-
-totalExpense += Number(amount.innerText);
-
+  row.children[0].innerText = index + 1;
+  let amount = row.querySelector(".amount");
+  totalExpense += Number(amount.innerText);
 });
 
-document.getElementById("totalExpense").innerText =
-formatINR(totalExpense);
+document.getElementById("totalExpense").innerText = formatINR(totalExpense);
 
 /* Closing Balance */
-
-let closingBalance =
-openingBalance + totalMaintenance - totalExpense;
-
-document.getElementById("closingBalance").innerText =
-formatINR(closingBalance);
-
+let closingBalance = openingBalance + totalMaintenance - totalExpense;
+document.getElementById("closingBalance").innerText = formatINR(closingBalance);
 </script>
 
 </body>
 </html>
-```
